@@ -1,10 +1,9 @@
 package main
 
 import (
-	"html/template"
 	"bytes"
-
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
+	"html/template"
 )
 
 type Generator struct {
@@ -41,9 +40,7 @@ func (p *Generator) Generate(file *generator.FileDescriptor) {
 	}
 }
 
-func (p *Generator) GenerateImports(file *generator.FileDescriptor) {
-	// nada
-}
+func (p *Generator) GenerateImports(file *generator.FileDescriptor) {}
 
 func init() {
 	generator.RegisterPlugin(NewGenerator())

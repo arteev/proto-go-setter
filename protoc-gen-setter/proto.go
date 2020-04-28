@@ -8,7 +8,7 @@ import (
 	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
 	"github.com/gogo/protobuf/protoc-gen-gogo/generator"
 
-	"github.com/codyaray/proto-go-setter/setter"
+	"github.com/arteev/proto-go-setter/setter"
 )
 
 type SetterFile struct {
@@ -80,5 +80,15 @@ func normalizeMessageVarType(field *descriptor.FieldDescriptorProto, g *generato
 		valType, _ := g.GoType(d, valField)
 		return fmt.Sprintf("map[%s]%s", keyType, valType)
 	}
+
+	if d, ok := desc.(*generator.Descriptor); ok {
+		if d.File().GetPackage() != ""  && g.DefaultPackageName(d)!="" {
+			partsImportPath := strings.Split(string(d.GoImportPath()), "/")
+			pathPkg := strings.ReplaceAll(partsImportPath[len(partsImportPath)-1], "-", "_")
+			return fmt.Sprintf("*%s.%s", pathPkg, desc.TypeName()[0])
+		}
+		return fmt.Sprintf("*%s", desc.TypeName()[0])
+	}
+
 	return "" // TODO non-map message types: https://github.com/golang/protobuf/blob/e344474228f55cc8e5f2342b0493b71bcdd258f4/protoc-gen-go/generator/generator.go#L2525
 }

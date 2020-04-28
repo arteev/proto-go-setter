@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+
+package ext;
+
+option go_package = "ext";
+
+message Tag {
+    string Name =1;
+    int32 Order = 2;
+}
+

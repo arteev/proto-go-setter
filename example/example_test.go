@@ -2,8 +2,8 @@ package person
 
 import (
 	"fmt"
-	"strings"
 	"reflect"
+	"strings"
 )
 
 func ExamplePerson1_SetName() {
@@ -68,7 +68,7 @@ func ExamplePerson4_NoSetters() {
 
 func ExamplePerson5_SetMap() {
 	p := &Person5{
-		Id: 1929,
+		Id:   1929,
 		Name: "Batman",
 	}
 

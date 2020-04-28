@@ -4,6 +4,9 @@ compile:
 build:
 	go build -o bin/protoc-gen-setter ./protoc-gen-setter
 
+install:
+	go install ./protoc-gen-setter/...
+
 examples: build
 	$(eval PATH=$(PATH):bin/)
 	protoc -I $(GOPATH)/src -I . --setter_out=. --gogo_out=. example/*.proto

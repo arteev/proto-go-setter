@@ -1,0 +1,18 @@
+syntax = "proto3";
+package person6;
+import "github.com/arteev/proto-go-setter/setter.proto";
+import "github.com/arteev/proto-go-setter/example/ext/ext.proto";
+
+
+
+message Role {
+    int32 id = 1;
+    string Name = 2;
+}
+
+message Person6 {
+    int32 id = 1;
+    string name = 2 [(setter.include)=true];
+    Role role = 3 [(setter.include)=true];
+    ext.Tag tags =4 [(setter.include)=true];
+}
